@@ -1,0 +1,2 @@
+使用unordered_map 使的search O(1)
+將元素加入map

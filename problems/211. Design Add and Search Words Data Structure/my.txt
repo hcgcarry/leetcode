@@ -1,0 +1,76 @@
+//use prefix tree
+class  Trie{
+    public:
+    void insert(string str){
+        
+        Trie* curNode = this;
+        
+        
+        for(int i=0;i<str.size();i++){
+            //cout << curNode << endl;
+            if(curNode->next.find(str[i]) == curNode->next.end()){
+                Trie* tmp = new Trie();
+                curNode->next[str[i]] = tmp;       
+            }
+              curNode = curNode->next[str[i]];
+        }
+        curNode->isString = true;
+    }
+    bool searchWord(string str){
+        if(str.size() ==0 ) return true;
+        return searchWordRecur(this,str,0);
+    }
+    bool searchWordRecur(Trie* curNode,string& str,int index){
+        
+        if(index == str.size()){
+            return curNode->isString;
+        }
+        char token = str[index];
+        if(token != '.'){
+            if(curNode->next.find(token) != curNode->next.end()){
+                return searchWordRecur(curNode->next[token],str,index+1);
+            }
+            else{
+                return false;
+            }
+            
+        }
+        else{
+            for(auto& nextItem:curNode->next){
+                if(searchWordRecur(nextItem.second,str,index+1)) return true;
+            }
+            return false;
+        }
+    }
+    private:
+        unordered_map<char,Trie*> next;
+        bool isString = false;
+};
+
+class WordDictionary {
+public:
+    /** Initialize your data structure here. */
+    WordDictionary() {
+        
+    }
+    
+    /** Adds a word into the data structure. */
+    void addWord(string word) {
+        preTree.insert(word);
+    }
+    
+    /** Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. */
+    bool search(string word) {
+        return preTree.searchWord(word);
+    }
+    private:
+        Trie preTree = Trie();
+};
+
+
+/**
+ * Your WordDictionary object will be instantiated and called as such:
+ * WordDictionary* obj = new WordDictionary();
+ * obj->addWord(word);
+ * bool param_2 = obj->search(word);
+ */

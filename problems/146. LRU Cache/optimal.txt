@@ -1,0 +1,47 @@
+https://leetcode.com/problems/lru-cache/discuss/45912/Clean-Short-Standard-C%2B%2B-solution-NOT-writing-C-in-C%2B%2B-like-all-other-lengthy-ones
+
+class LRUCache {
+public:
+    list<pair<int ,int >>mList;
+    // 注意第二個值是iterator
+    //用這個map存是為了find的時候可以是O(1)
+    unordered_map<int,list<pair<int,int>>::iterator> m_map;
+   
+    int cacheSize;
+    LRUCache(int capacity):cacheSize(capacity) {
+        
+    }
+    
+    int get(int key) {
+        auto find_entry = m_map.find(key);
+        if(find_entry == m_map.end()){
+            return -1;
+        }
+        mList.splice(mList.begin(),mList,find_entry->second);
+        return find_entry->second->second;
+    }
+    
+    void put(int key, int value) {
+        auto find_entry = m_map.find(key);
+        if(find_entry != m_map.end()){
+           mList.splice(mList.begin(),mList,find_entry->second);
+           find_entry->second->second = value;
+            return ;
+        }
+        if(cacheSize == m_map.size()){
+            int key_to_delete = mList.back().first;
+            mList.pop_back();
+            m_map.erase(key_to_delete);
+        }
+         mList.emplace_front(key,value);
+            m_map[key] = mList.begin();
+     
+    }
+};
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */

@@ -1,0 +1,43 @@
+class Solution {
+public:
+    vector<string> result;
+    vector<string> restoreIpAddresses(string s) {
+        int index=0,count=1;
+        recur(s,"",index,count);
+        return result;
+    }
+    
+    void recur(string& s,string localResult,int index,int count){
+        cout << "s " << s<< "localResult " << localResult << "index " << index << "count " << count << endl;
+        if(count == 5){
+            if(index == s.size()){
+                cout << "push back" << endl;
+                result.push_back(localResult);
+                return;
+            }
+            else{
+                return;
+            }
+            
+        }
+        
+        for(int i=1;i<=3 && index+i <= s.size();i++){
+            string tmpstr = s.substr(index,i);
+            
+            int tmpint = stoi(tmpstr);
+            if(tmpint > 255) return;
+            if(tmpstr[0] == '0' && i !=1) return;
+            if(index+i != s.size()){
+                tmpstr+=".";
+            }
+            
+            recur(s,localResult + tmpstr,index+i,count+1);
+            
+          
+        }
+        
+        
+        
+        
+    }
+};

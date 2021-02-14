@@ -1,0 +1,19 @@
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        vector<string> result(numRows);
+        if(numRows ==1) return s;
+        int direction = -1;
+        int row=0;
+        for(int i=0;i<s.size();i++){
+            result[row].push_back(s[i]);
+            if(i % (numRows-1) ==0) direction *=-1;
+            row += direction;
+        }
+        string res;
+        for(auto tmp:result){
+            res +=tmp;
+        }
+        return res;
+    }
+};

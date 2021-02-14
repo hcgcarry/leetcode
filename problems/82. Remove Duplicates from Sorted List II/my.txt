@@ -1,0 +1,36 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode* fakeHead = new ListNode(-1);
+        fakeHead ->next = head;
+        ListNode* preNode = fakeHead;
+        int curDeleteNum ;
+     
+        while(preNode->next && preNode->next->next){
+            if(preNode->next->val == preNode->next->next->val){
+                curDeleteNum =  preNode->next->val;
+                while(preNode->next && preNode->next->val == curDeleteNum){
+                    ListNode* tmp = preNode->next;
+                    preNode->next = preNode->next->next;
+                    delete tmp;
+                }
+                
+            }
+            else{
+                preNode = preNode->next;
+            }
+        }
+        //記得這邊不要return head,如果head被delete調會有heap use after free的問題
+        return fakeHead->next;
+    }
+};

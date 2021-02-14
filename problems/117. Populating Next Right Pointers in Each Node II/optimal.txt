@@ -1,0 +1,21 @@
+//想法:每找到一個node就把前面的那個node->next連過來，但是第一個沒有前面的node,就自己造一個
+//連到下一層的第一個也是藉由tempChild
+public void connect(TreeLinkNode root) {
+    TreeLinkNode tempChild = new TreeLinkNode(0);
+    while (root != null) {
+        TreeLinkNode currentChild = tempChild;
+        while (root != null) {
+            if (root.left != null) {
+                currentChild.next = root.left;
+                currentChild = currentChild.next;
+            }
+            if (root.right != null) {
+                currentChild.next = root.right;
+                currentChild = currentChild.next;
+            }
+            root = root.next;
+        }
+        root = tempChild.next;
+        tempChild.next = null;
+    }
+}

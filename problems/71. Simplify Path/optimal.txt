@@ -1,0 +1,39 @@
+class Solution {
+public:
+    string simplifyPath(string path) {
+        stringstream ss(path);
+        string tmp;
+        stack<string> dirStack;
+        while(getline(ss,tmp,'/')){
+            cout << "tmp" << tmp << endl;
+            if(tmp == "." ||tmp==""){
+              cout << " continue";
+                  continue;
+               
+
+            }
+            if(tmp == ".." && !dirStack.empty()){
+                //note 要加!dirStack.empty()
+           cout << "dirstack pop";
+                 dirStack.pop();
+               
+            }
+            else if(tmp!=".."){
+                cout<< "push" ;
+                dirStack.push(tmp);
+            }
+        
+        }
+        cout << "fjdkfd" << endl;
+        string result="";
+        while(!dirStack.empty()){
+            result= "/"+dirStack.top() + result;
+            
+            dirStack.pop();
+        }
+        if(result==""){
+            result = "/";
+        }
+        return result;
+    }
+};

@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool wordPattern(string pattern, string s) {
+        unordered_map<char,int> pat_map;
+        unordered_map<string,int> s_map;
+        stringstream ss(s);
+       
+        for(int i=0;i<pattern.size();i++){
+            string curS;
+            //確認pattern 和s的長度有沒依樣
+            if(!(ss >> curS)) return false;
+            if(pat_map.find(pattern[i]) != pat_map.end() && s_map.find(curS)!= s_map.end()){
+                if(pat_map[pattern[i]] == s_map[curS])continue;
+            }
+            else if(pat_map.find(pattern[i]) == pat_map.end() && s_map.find(curS) == s_map.end()){
+                pat_map[pattern[i]] = s_map[curS] = i;
+                continue;
+            } 
+            return false;
+        }
+        string curS;
+        //確認pattern 和s的長度有沒依樣
+          if((ss >> curS)) return false;
+        return true;
+    }
+};

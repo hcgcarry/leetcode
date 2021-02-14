@@ -1,0 +1,5 @@
+https://leetcode.com/problems/single-number-ii/discuss/43296/An-General-Way-to-Handle-All-this-sort-of-questions.
+a用來b記錄一個int32每一個bit的出現次數
+想想xor,同一個bit出現兩次會變成0,這邊的目標是出現三次變成0
+
+記得搭配 下面的第一個comment看

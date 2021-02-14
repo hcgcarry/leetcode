@@ -1,0 +1,1 @@
+https://leetcode.com/problems/power-of-three/discuss/77915/One-line-c-solution

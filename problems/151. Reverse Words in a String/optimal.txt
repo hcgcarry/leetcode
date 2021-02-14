@@ -1,0 +1,22 @@
+class Solution {
+public:
+    string reverseWords(string s) {
+        reverse(s.begin(),s.end());
+
+        int sortedIndex=0;
+        for (int i = 0; i < s.size(); i++) {
+            if(s[i] != ' '){
+                if(sortedIndex!=0) s[sortedIndex++] = ' ';
+                int j=i;
+                while(s[j] != ' ' && j<s.size()) s[sortedIndex++] = s[j++];
+                reverse(s.begin()+sortedIndex - (j-i),s.begin()+sortedIndex);
+                i=j;
+            }
+            
+            
+   
+        }
+        s.erase(s.begin() + sortedIndex, s.end());
+        return s;
+    }
+};

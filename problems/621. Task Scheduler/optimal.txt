@@ -1,0 +1,1 @@
+https://leetcode.com/problems/task-scheduler/discuss/104504/C%2B%2B-8lines-O(n)

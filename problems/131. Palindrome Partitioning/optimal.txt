@@ -1,0 +1,4 @@
+https://leetcode.com/problems/palindrome-partitioning/discuss/41964/Clean-C%2B%2B-backtracking-solution
+
+So is the time complexity O(n * 2^n)?
+My thought is, in the worst case (i.e. "aa...aa") there are O(2^n) kind of partition configuration, and each configuration takes O(n) to check isPalindrome.

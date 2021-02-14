@@ -1,0 +1,42 @@
+class Solution {
+public:
+    vector<string> summaryRanges(vector<int>& nums) {
+        long long localMax,localMin;
+       
+        vector<string> result;
+         if(nums.empty())return result;
+        localMax = localMin = nums[0];
+        string localResult="";
+        for(int i=0;i<nums.size();i++){
+            
+            if(i == nums.size()-1){
+                localResult=to_string(localMin);
+                if(localMax != localMin){
+                    localResult += "->";
+                    localResult += to_string(localMax);
+                }
+                
+                result.push_back(localResult);
+                localMax = localMin = nums[i+1];
+                break;
+            }
+            // 注意這邊不能寫成 nums[i+1] - nums[i] ==1 ,因為如果Input是[-2147483648,-2147483647,2147483647]的時候 2147483647 - -2147483647 會超過int的範圍
+            if( nums[i] == nums[i+1] -1 ){
+                localMax = nums[i+1];
+            }
+            else{
+                localResult=to_string(localMin);
+                if(localMax != localMin){
+                    localResult += "->";
+                    localResult += to_string(localMax);
+                }
+                
+                result.push_back(localResult);
+                localMax = localMin = nums[i+1];
+                
+               
+            }
+        }
+        return result;
+    }
+};

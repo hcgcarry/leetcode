@@ -1,0 +1,1 @@
+https://leetcode.com/problems/maximal-square/discuss/61803/C%2B%2B-space-optimized-DP

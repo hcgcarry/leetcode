@@ -1,0 +1,32 @@
+class Solution {
+public:
+    void gameOfLife(vector<vector<int>>& board) {
+        if(board.empty() || board[0].empty()) return ;
+        int row = board.size();
+        int col = board[0].size();
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                int count=0;  
+                //這個剔除邊界的方法要學,記得是+2 因為 這邊的符號是小於
+                for(int k=max(0,i-1);k<min(i+2,row);k++){
+                      for(int f=max(0,j-1);f<min(j+2,col);f++){
+                          //cout << "k" << k<< "f" << f<<endl;
+                          count += board[k][f] &1;
+                      }
+                  }
+               if (count == 3 || count - board[i][j] == 3){
+                    board[i][j] |= 2;
+                }
+                
+                
+            }
+            
+        }
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                board[i][j] >>= 1;
+            }
+        }
+    }
+    
+};

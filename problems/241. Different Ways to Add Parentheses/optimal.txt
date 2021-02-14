@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<int> diffWaysToCompute(string input) {
+        vector<int> result;
+        for(int i=0;i<input.size();i++){
+            char token = input[i];
+            if(token == '-' || token == '*' || token == '+' ){
+                vector<int> resultLeft = diffWaysToCompute(input.substr(0,i));
+                vector<int> resultRight = diffWaysToCompute(input.substr(i+1));
+                for(auto itemLeft :resultLeft){
+                    for(auto itemRight:resultRight){
+                        switch(token){
+                            case '-':
+                                result.push_back(itemLeft-itemRight);
+                                break;
+                            case '+':
+                                result.push_back(itemLeft+itemRight);
+                                break;
+                            case '*':
+                                result.push_back(itemLeft*itemRight);
+                                break;
+                        }
+                    }
+                }
+            }
+          
+        }
+  if(result.empty()){
+                result.push_back(stoi(input));
+            
+            }
+        return result;
+    }
+};

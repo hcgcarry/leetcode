@@ -1,0 +1,3 @@
+https://leetcode.com/problems/bitwise-and-of-numbers-range/discuss/56746/One-line-C%2B%2B-solution
+
+想法:如果n>m那麼把它們中間的所有數字and起來,這些數字依定會有最後一個bit是0的,那麼最後一個bit做and一定會是0

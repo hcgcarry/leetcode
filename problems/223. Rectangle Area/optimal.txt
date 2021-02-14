@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
+        int dup = 0;
+        int left = max(A,E),right = min(C,G);
+        int buttom = max(B,F) , top = min(D,H);
+        if(right <= left || top <= buttom){
+           dup=0; 
+        }
+        else{
+            dup = (right - left )* ( top - buttom);
+        }
+        return (long)(C-A) * (D-B) + (G-E) * (H-F) - dup;
+    }
+};

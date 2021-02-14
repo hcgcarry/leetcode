@@ -1,0 +1,28 @@
+
+// num1Len + num2Len-1 -(num1Len -1 - i + num2Len -1 -j) = i+j+1;
+class Solution {
+public:
+    string multiply(string num1, string num2) {
+        int num1Len = num1.size();
+        int num2Len = num2.size();
+        string result(num1Len+num2Len,'0');
+        
+        for(int i=num1Len-1;i >=0;i--){
+            for(int j=num2Len-1;j>=0;j--){
+                //(result[i+j+1] - '0')  記得
+                int tmp =(num1[i] - '0') * (num2[j] -'0') + (result[i+j+1] - '0');
+                result[i+j+1] = tmp %10+'0';
+                result[i+j] += tmp/10;
+            }
+        }
+        int index=0;
+        for(int i=0;i<num1Len+num2Len;i++){
+            if(result[i] !='0')
+            return result.substr(i);
+        }
+        
+        return "0";
+        
+        
+    }
+};

@@ -1,0 +1,43 @@
+https://leetcode.com/problems/search-in-rotated-sorted-array-ii/discuss/28218/My-8ms-C%2B%2B-solution-(o(logn)-on-average-o(n)-worst-case)
+class Solution {
+public:
+    bool search(vector<int>& nums, int target) {
+        if(nums.empty()) return false;
+        int left = 0;
+        int right = nums.size()-1;
+       
+        
+        while(right >= left){
+             int mid = (right + left)/2;
+            if(nums[mid] == target) return true;
+           cout << "right" << right <<"left" << left << "mid" << mid << endl;
+            if( (nums[left] == nums[mid]) && (nums[right] == nums[mid]) ) {++left; --right;}
+           
+            
+           
+            else if(nums[mid] >= nums[left]){
+                cout << "top" ;
+                if( target < nums[mid] && target >= nums[left]){
+                   right = mid -1; 
+                } 
+                else{
+                    left = mid+1;
+                }
+            }
+            else{
+                cout << "below";
+		//不要寫 target >= nums[mid+1]  因為不一定有mid+1
+                if(target <= nums[right] && target > nums[mid]){
+                    left = mid+1;
+                    
+                }
+                else{
+                    right = mid -1;
+                }
+            }
+            
+            
+        }
+        return false;
+    }
+};

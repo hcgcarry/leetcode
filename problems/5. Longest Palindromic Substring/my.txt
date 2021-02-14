@@ -1,0 +1,38 @@
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        if(s.empty())return s;
+        int len=s.size();
+        vector<vector<int>> dp(s.size(),vector<int>(s.size()));
+        int minIndex=0,maxIndex=0;
+        //initial dp
+        for(int i=0;i<s.size();i++){
+            dp[i][i] = 1;
+            
+        }
+        for(int i=0;i<len-1;i++){
+            dp[i][i+1] = (s[i] == s[i+1])?1:0;
+        }
+        
+        for(int i=len-3;i>=0;i--){
+            for(int j=i+2;j<len;j++){
+                if(s[i] == s[j] && dp[i+1][j-1] ==1){
+                    dp[i][j] = 1;
+                 
+                }
+            }
+        }
+        for(int i=0;i<len;i++){
+            for(int j=0;j<len;j++){
+                if(dp[i][j] && j-i > maxIndex - minIndex){
+                    maxIndex =j;
+                    minIndex= i;
+                }
+            }
+        }
+        cout << "minIndex" << minIndex << "maxIndex" << maxIndex << endl;
+        return s.substr(minIndex,maxIndex-minIndex+1);
+        
+        
+    }
+};

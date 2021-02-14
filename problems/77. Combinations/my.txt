@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<vector<int>> combine(int n, int k) {
+        vector<vector<int>> result;
+        vector<int> localResult;
+        recur(result,localResult,n,k);
+        return result;
+    }
+    
+    void recur(vector<vector<int>>& result,vector<int>& localResult,int n,int k){
+        if(k==0 && n>=0){
+            result.push_back(localResult);
+            return;
+        }
+        else if(n < 1){
+            return;
+        }
+        
+       
+        for(int i=n;i>=1;i--){
+            localResult.push_back(i);
+            recur(result,localResult,i-1,k-1);
+            
+            localResult.pop_back();
+        }
+        
+        
+        
+    }
+};

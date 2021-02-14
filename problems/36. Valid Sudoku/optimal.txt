@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        
+           int used1[9][9] = {0}, used2[9][9] = {0}, used3[9][9] = {0};
+        
+        int colSize = board.size();
+        for(int i=0;i<colSize;i++){
+            for(int j=0;j<colSize;j++){
+                if(board[i][j] != '.'){
+                    //還要-1是因為used陣列重0開始到8結束,所以board上面的數字要跟著調整
+                     int curValue = board[i][j] - '0'-1;
+                int used3Index = i/3*3 + j/3;
+                if(used1[i][curValue] || used2[j][curValue] || used3[used3Index][curValue]) return false;
+                used1[i][curValue] =  used2[j][curValue] = used3[used3Index][curValue] = 1;
+                }
+               
+                
+                
+            }
+        }
+        return true;
+    }
+};

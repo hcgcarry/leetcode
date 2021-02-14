@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        if(dividend == INT_MIN && divisor == -1) return INT_MAX;
+        long result = 0 ;
+        // 其實不因該用Long的 這不是好的解法, 這個code如果把long改成int 如果dividend是很接近INT_MAX的值 ,在下面curdivisor shift的時候很容易就超出INT_MAX
+        long curDivisor = labs(divisor),curDividend = labs(dividend);
+        
+        int sign = (dividend ^ divisor)<0?-1:1;
+        while(labs(divisor) <= curDividend){
+            
+            int curResult = 1;
+            curDivisor = labs(divisor);
+            cout <<"curdivisor" <<  curDivisor << endl ;
+            while(curDivisor << 1 <= curDividend){
+                //cout << "curdivisor" << curDivisor << "curDividend" << curDividend << endl ;
+                
+                curResult <<= 1;
+                curDivisor <<= 1;
+            
+             }
+            curDividend -= curDivisor;
+            result += curResult;
+        }
+        result *= sign;
+        return result;
+        
+    }
+};

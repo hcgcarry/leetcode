@@ -1,0 +1,20 @@
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        string result = "";
+        int aLen = a.size()-1;
+        int bLen = b.size()-1;
+        int c=0;
+        while(aLen >= 0 || bLen >=0 || c){
+            c += aLen >= 0 ? a[aLen] - '0':0;
+            c += bLen >= 0? b[bLen] - '0':0;
+            // result = char(c%2+'0') + result; 這樣寫每次都會copy result 造成O(n^2)的cost
+            result += char(c % 2 + '0');
+            c /= 2;
+            aLen --;
+            bLen--;
+        }
+        reverse(result.begin(),result.end());
+        return result;
+    }
+};

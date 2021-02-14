@@ -1,0 +1,43 @@
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        stack<int> st;
+        int result;
+        
+        for(string item:tokens){
+            if(item == "+" ){
+                int operand2 = st.top();
+                st.pop();
+                int operand1 = st.top();
+                st.pop();
+                st.push(operand1+operand2);
+                
+            }
+            else if(item == "-"){
+                int operand2 = st.top();
+                st.pop();
+                int operand1 = st.top();
+                st.pop();
+                st.push(operand1-operand2);
+            }
+              else if(item == "*"){
+                int operand2 = st.top();
+                st.pop();
+                int operand1 = st.top();
+                st.pop();
+                st.push(operand1*operand2);
+            }
+              else if(item == "/"){
+                int operand2 = st.top();
+                st.pop();
+                int operand1 = st.top();
+                st.pop();
+                st.push(operand1/operand2);
+            }
+            else{
+                st.push(stoi(item));
+            }
+        }
+        return st.top();
+    }
+};

@@ -1,0 +1,40 @@
+class Solution {
+public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<vector<int>> adjList = buildAdjList(numCourses,prerequisites);
+        vector<bool> inCurPath(numCourses,false),visited(numCourses,false);
+        for(int i=0;i<numCourses;i++){
+            if(hasCycle(adjList,inCurPath,visited,i)) return false;
+        }
+        return true;
+    }
+    
+private:
+    bool hasCycle(vector<vector<int>>& adjList,vector<bool>& inCurPath,vector<bool>& visited,int curNode){
+        
+        if(visited[curNode] && inCurPath[curNode]){
+            return true;
+            
+        }
+        else if(visited[curNode]){
+            return false;
+        }
+      
+            visited[curNode] = true;
+            inCurPath[curNode] = true;
+            for(auto item:adjList[curNode]){
+                if(hasCycle(adjList,inCurPath,visited,item)) return true;
+            }
+            inCurPath[curNode] = false;
+            return false;
+        
+    }
+    
+    vector<vector<int>> buildAdjList(int numCourses,vector<vector<int>>& prerequisites){
+        vector<vector<int>> result(numCourses);
+        for(auto item:prerequisites){
+            result[item[1]].push_back(item[0]);
+        }
+        return result;
+    }
+};

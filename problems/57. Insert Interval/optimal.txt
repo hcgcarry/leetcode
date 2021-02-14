@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        vector<vector<int>> result;
+        int index = 0;
+        int len = intervals.size();
+        while(index <len && intervals[index][1] < newInterval[0] ){
+            result.push_back(intervals[index++]);
+           // cout << "1" << endl;
+        }
+        
+        while(index <len && intervals[index][0] <= newInterval[1]){
+            newInterval[0] = min(intervals[index][0],newInterval[0]);
+            newInterval[1] = max(intervals[index][1],newInterval[1]);
+            index++;
+             // cout << "2" << endl;
+        }
+        result.push_back(newInterval);
+        while(index < len ){
+            result.push_back(intervals[index++]);
+             // cout << "3" << endl;
+        }
+        return result;
+    }
+};

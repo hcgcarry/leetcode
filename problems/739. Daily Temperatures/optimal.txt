@@ -1,0 +1,29 @@
+Stack Easy Solution
+The solution is based on the simple logic that if you start from the right
+
+You can keep track of the numbers seen so that when you move left -> That left element already knows which is the maximum number it will encounter
+If the current number is smaller than the previously seen number -> Simply get the diff in the positions and insert into the stack
+If the number is greater than the previously seen in stack -> Keep removing all the numbers (Since we need to find the number larger than it. IF found then great if not then it has result 0).
+One great reason you can just remove the smaller numbers from stack(seen in right) is that now that we have current number larger than its right elements -> Hence for the lefter elements THIS CURRENT element will itself be the nearest largest number
+
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+        stack<pair<int,int>> s; //First is the number while second is the position
+        
+        int n= temperatures.size();
+        vector<int> result(n,0);
+        
+        for(int i=n-1;i>=0;i--)
+        {
+            int curr = temperatures[i];
+            while(!s.empty() && s.top().first <= curr) s.pop();
+            
+            result[i] = s.empty() ? 0 : s.top().second - i;
+
+            s.push({curr,i});
+        }
+        
+        return result;
+    }
+};

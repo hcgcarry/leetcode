@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> partitionLabels(string S) {
+        vector<int> maxCount(26,-1);
+        for(int i=0;i<S.size();i++){
+            char token = S[i];
+            maxCount[token-'a'] = i;
+            
+        }
+        vector<int> result;
+        cout << "fjdskf" << endl;
+        int last=0;
+        int curMaxCoverIndex=INT_MIN;
+        for(int i=0;i<S.size();i++){
+            curMaxCoverIndex = max(curMaxCoverIndex,maxCount[S[i]-'a']);
+            if(i == curMaxCoverIndex) {
+                result.push_back(i-last+1);
+                last = i+1;
+            }
+            
+        }
+        return result;
+    }
+};

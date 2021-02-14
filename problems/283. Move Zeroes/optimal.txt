@@ -1,0 +1,1 @@
+https://leetcode.com/problems/move-zeroes/discuss/72005/My-simple-C%2B%2B-solution
